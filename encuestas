@@ -16,7 +16,6 @@
             color: white;
             font-family: Arial, sans-serif;
             position: relative;
-            padding: 10px; /* Agregado para evitar el desbordamiento en móviles */
         }
         .container {
             position: absolute;
@@ -26,12 +25,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            width: 80%; /* Ajuste para que se ajuste mejor a pantallas pequeñas */
-            max-width: 400px; /* Limita el ancho máximo */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         input {
             padding: 12px;
@@ -42,8 +35,6 @@
             background: #222;
             color: white;
             outline: none;
-            width: 100%; /* Hace que el campo de texto sea más grande en móviles */
-            margin-bottom: 15px; /* Espacio adicional */
         }
         button {
             margin-top: 10px;
@@ -57,7 +48,6 @@
             color: white;
             font-weight: bold;
             box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
-            width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
         }
         button:hover {
             background: #00aaff;
@@ -84,7 +74,7 @@
         .fire-container {
             position: absolute;
             top: 76%;
-            left: 50%;
+            left: 40%;
             transform: translate(-50%, -50%);
             width: 70px;
             height: 100px;
