@@ -17,11 +17,12 @@
             position: relative;
         }
 
+        /* Fondo oscuro con estrellas */
         .stars {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
 
@@ -32,43 +33,75 @@
             animation: twinkle 1.5s infinite;
         }
 
+        /* Estrellas fugaces */
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            box-shadow: 0 0 10px white;
+            animation: shooting 2s linear infinite;
+        }
+
         @keyframes twinkle {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
 
+        @keyframes shooting {
+            from {
+                transform: translate(100vw, -10vh);
+                opacity: 1;
+            }
+            to {
+                transform: translate(-10vw, 100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor con estilo más bonito */
         .container {
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             text-align: center;
+            backdrop-filter: blur(5px);
         }
 
+        /* Cuadro de texto con bordes brillantes */
         input {
             padding: 10px;
-            border: 2px solid #333;
+            border: 2px solid rgba(255, 255, 255, 0.5);
             border-radius: 5px;
+            background: transparent;
+            color: white;
             width: 80%;
             margin: 10px 0;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #333;
+            background-color: rgba(255, 255, 255, 0.3);
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #555;
+            background-color: rgba(255, 255, 255, 0.5);
         }
 
+        /* Cabaña en la parte inferior */
         .cabin {
             position: absolute;
             bottom: 20px;
@@ -118,17 +151,31 @@
             for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                const size = Math.random() * 3 + 1; // Tamaño aleatorio
+                const size = Math.random() * 3 + 1;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 star.style.top = `${Math.random() * 100}vh`;
                 star.style.left = `${Math.random() * 100}vw`;
-                star.style.animationDuration = `${Math.random() * 2 + 1}s`; // Duración aleatoria
+                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
                 starsContainer.appendChild(star);
             }
         }
 
+        // Generar estrellas fugaces
+        function createShootingStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 5; i++) {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.top = `${Math.random() * 100}vh`;
+                shootingStar.style.left = `${Math.random() * 100}vw`;
+                shootingStar.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                starsContainer.appendChild(shootingStar);
+            }
+        }
+
         createStars();
+        createShootingStars();
     </script>
 </body>
 </html>
