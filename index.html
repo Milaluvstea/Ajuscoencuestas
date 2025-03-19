@@ -7,175 +7,179 @@
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('https://images.unsplash.com/photo-1518606372020-1b1c1c1c1c1c') no-repeat center center fixed;
-            background-size: cover;
-            overflow: hidden;
+            height: 100vh;
+            background: radial-gradient(circle, #0a0a3c, #020214);
+            color: white;
+            font-family: Arial, sans-serif;
             position: relative;
+            padding: 10px; /* Agregado para evitar el desbordamiento en móviles */
         }
-
-        /* Fondo oscuro con estrellas */
-        .stars {
+        .container {
             position: absolute;
+            text-align: center;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            width: 80%; /* Ajuste para que se ajuste mejor a pantallas pequeñas */
+            max-width: 400px; /* Limita el ancho máximo */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #00aaff;
+            border-radius: 5px;
+            text-align: center;
+            background: #222;
+            color: white;
+            outline: none;
+            width: 100%; /* Hace que el campo de texto sea más grande en móviles */
+            margin-bottom: 15px; /* Espacio adicional */
+        }
+        button {
+            margin-top: 10px;
+            padding: 12px 25px;
+            font-size: 18px;
+            background: transparent;
+            border: 2px solid #00aaff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+            width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+        }
+        button:hover {
+            background: #00aaff;
+            color: white;
+            transform: scale(1.1);
+        }
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            mix-blend-mode: multiply;
         }
-
-        .star {
+        .image-container img {
+            width: 100%;
+            height: auto;
+            mix-blend-mode: multiply;
+            opacity: 100%;
+        }
+        .fire-container {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 1.5s infinite;
-        }
-
-        /* Estrellas fugaces */
-        .shooting-star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            box-shadow: 0 0 10px white;
-            animation: shooting 2s linear infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes shooting {
-            from {
-                transform: translate(100vw, -10vh);
-                opacity: 1;
-            }
-            to {
-                transform: translate(-10vw, 100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Contenedor con estilo más bonito */
-        .container {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-
-        /* Cuadro de texto con bordes brillantes */
-        input {
-            padding: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 5px;
-            background: transparent;
-            color: white;
-            width: 80%;
-            margin: 10px 0;
-            outline: none;
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Cabaña en la parte inferior */
-        .cabin {
-            position: absolute;
-            bottom: 20px;
+            top: 76%;
             left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 150px;
-            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0') no-repeat center center;
-            background-size: cover;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 100px;
+            z-index: 5;
+        }
+        .fire-container img {
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: multiply;
+        }
+        .stars, .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 5px white;
+            animation: twinkle 3s infinite;
+        }
+        @keyframes twinkle {
+            50% { opacity: 0.3; }
+        }
+        .shooting-star {
+            width: 4px;
+            height: 4px;
+            background: yellow;
+            animation: shoot 2s infinite linear;
+        }
+        @keyframes shoot {
+            0% { transform: translate(100vw, -10vh); opacity: 1; }
+            100% { transform: translate(-50vw, 50vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="container">
-        <h1>Bienvenido al proyecto final</h1>
-        <p>Por favor, ingrese el código dado por los representantes:</p>
-        <input type="text" id="codeInput" placeholder="Ingrese el código aquí">
-        <button onclick="checkCode()">Enviar</button>
-    </div>
-    <div class="cabin"></div>
-
     <script>
-        const codes = {
-            '1642': 'https://enlace1.com',
-            '6359': 'https://enlace2.com',
-            '5487': 'https://enlace3.com',
-            '9621': 'https://enlace4.com',
-            '8745': 'https://enlace5.com',
-            '7458': 'https://enlace6.com'
-        };
+        function createStars(num) {
+            for (let i = 0; i < num; i++) {
+                let star = document.createElement("div");
+                star.className = "stars";
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(star);
+            }
+        }
+
+        function createShootingStar() {
+            let star = document.createElement("div");
+            star.className = "shooting-star";
+            star.style.top = Math.random() * 50 + "vh";
+            star.style.left = Math.random() * 100 + "vw";
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        createStars(100);
+        setInterval(createShootingStar, 3000);
 
         function checkCode() {
-            const input = document.getElementById('codeInput').value;
-            const url = codes[input];
-            if (url) {
-                window.location.href = url;
+            var code = document.getElementById("codeInput").value;
+            var links = {
+                "1269": "https://youtu.be/PYQYAUBI8AY?si=amS14rAFp25jjP1W",
+                "6942": "https://youtu.be/xMxt2NiXmgs?si=vs9RQVcKDZyRM-t5",
+                "1875": "https://youtu.be/Vlb4E9m9S6w?si=wkDnGc47eEOvPcjQ",
+                "4444": "https://youtu.be/UAV1dWyjaAU?si=diYAbHYldNhqh_He",
+                "5693": "https://youtu.be/5JFfvAUOkGI?si=OQk8L4sCKlqg1otf",
+                "1308": "https://youtu.be/xw6yLI-PPgM?si=ktKlhOagyZ1Frtnt"
+            };
+
+            if (links[code]) {
+                window.location.href = links[code];
             } else {
-                alert('Código incorrecto. Inténtalo de nuevo.');
+                alert("Código incorrecto, inténtelo de nuevo.");
             }
         }
 
-        // Generar estrellas
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.left = `${Math.random() * 100}vw`;
-                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                starsContainer.appendChild(star);
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                checkCode();
             }
         }
-
-        // Generar estrellas fugaces
-        function createShootingStars() {
-            const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 5; i++) {
-                const shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                shootingStar.style.top = `${Math.random() * 100}vh`;
-                shootingStar.style.left = `${Math.random() * 100}vw`;
-                shootingStar.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                starsContainer.appendChild(shootingStar);
-            }
-        }
-
-        createStars();
-        createShootingStars();
     </script>
+
+    <div class="container">
+        <h1>Bienvenido al proyecto final</h1>
+        <p>Por favor, ingrese el código dado por los representantes</p>
+        <input type="text" id="codeInput" placeholder="Ingrese código" onkeydown="checkEnter(event)">
+        <button onclick="checkCode()">Ingresar</button>
+    </div>
+
+    <div class="image-container">
+        <img src="https://scontent.fmex2-1.fna.fbcdn.net/v/t39.30808-6/481783985_666401382425276_1748038720067318412_n.jpg?stp=dst-jpg_p552x414_tt6&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGqLFyIqQR5frZmKxkYY1Xr1O0T1IeIwvvU7RPUh4jC-xw0viU8AjkdEEKa4TAxLGkASKfXAenbePj1Hl2-0w3y&_nc_ohc=e5G8ICIb1PEQ7kNvgHiWdcg&_nc_oc=AdhH7aqpkmAB85VQCHR4eUkbU9gTgiWkQ9BoDZyxOcAgguFxDlcE7ZDxNTFUywhJc9InAMtvqrwYz8ClsiHHAd_F&_nc_zt=23&_nc_ht=scontent.fmex2-1.fna&_nc_gid=AhuRbaaVmV0ieX9qsDywx1Q&oh=00_AYHYX6uK3Pwy2G7YJlUkKG3KJXo4qp3aYDOIK5ZdqsXLtA&oe=67D84FE6" alt="Imagen decorativa">
+    </div>
+
+    <div class="fire-container">
+        <img src="https://usagif.com/wp-content/uploads/gifs/fire-46.gif" alt="Fuego animado">
+    </div>
 </body>
 </html>
